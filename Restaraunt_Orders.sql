@@ -11,8 +11,7 @@ COMMENT 'Server Table'
 ;
 CREATE TABLE IF NOT EXISTS tables (
     table_id    INTEGER    NOT NULL    AUTO_INCREMENT	COMMENT 'ID of Table',
-    server_id    INTEGER    NOT NULL    AUTO_INCREMENT	COMMENT 'ID of Server',
-    order_id    INTEGER    NOT NULL    AUTO_INCREMENT	COMMENT 'ID of Order',
+    server_id    INTEGER    NOT NULL    	COMMENT 'ID of Server',
 
     PRIMARY KEY (table_id)
 )
@@ -25,8 +24,8 @@ ALTER TABLE tables
 
 CREATE TABLE IF NOT EXISTS food_orders (
     order_id    INTEGER    NOT NULL    AUTO_INCREMENT    COMMENT 'ID of Order',
-    server_id    INTEGER    NOT NULL    AUTO_INCREMENT    COMMENT 'ID of Server',
-    table_id    INTEGER    NOT NULL    AUTO_INCREMENT    COMMENT 'ID of Table',
+    server_id    INTEGER    NOT NULL        COMMENT 'ID of Server',
+    table_id    INTEGER    NOT NULL       COMMENT 'ID of Table',
     date    DATE    NOT NULL    COMMENT 'Date of Food Order',
     time_ordered    TIME    NOT NULL    COMMENT 'Time of Order Placement',
     time_completed    TIME    NULL    COMMENT 'Time of Order Completion',
@@ -35,12 +34,8 @@ CREATE TABLE IF NOT EXISTS food_orders (
 
     PRIMARY KEY (order_id)
 )
+;
 COMMENT 'Food Orders Table'
-
-ALTER TABLE tables
-    ADD CONSTRAINT    tables_order_id_fk
-    FOREIGN KEY    (order_id)
-    REFERENCES    food_orders (order_id);
 
 ALTER TABLE food_orders
     ADD CONSTRAINT    food_orders_server_id_fk
@@ -59,17 +54,18 @@ CREATE TABLE IF NOT EXISTS menu_items (
 
     PRIMARY KEY (item_id)
 )
-
+;
 CREATE TABLE IF NOT EXISTS order_details (
     order_details_id    INT    NOT NULL    AUTO_INCREMENT    COMMENT 'ID number of order details',
-    order_id    INTEGER    NOT NULL    AUTO_INCREMENT    COMMENT 'ID of Order',
-    item_id    INT    NOT NULL    AUTO_INCREMENT    COMMENT 'ID of Menu Item',
+    order_id    INTEGER    NOT NULL        COMMENT 'ID of Order',
+    item_id    INT    NOT NULL        COMMENT 'ID of Menu Item',
     name    VARCHAR(16)    NOT NULL    COMMENT 'Name of order'
     quantity    TINYINT    NOT NULL    COMMENT 'Number of item'
     total_price    DECIMAL(6,2)    NOT NULL    COMMENT 'Total price of order. price x quantity'
     
     PRIMARY KEY (order_details_id)
 )
+;
 ALTER TABLE order_details
     ADD CONSTRAINT    order_details_order_id_fk
     FOREIGN KEY    (order_id)
