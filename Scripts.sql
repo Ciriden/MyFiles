@@ -13,6 +13,6 @@ SELECT *
 FROM order_details
 WHERE (total_price < 100);
 
-SELECT firstname,lastname
+SELECT first_name,last_name
 FROM servers
-WHERE (availability = Yes);
+WHERE (availability = 'Yes');
